@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { getProductsAddedWithinLastWeek } from "../_utils/ProductApis";
+import React, { useEffect, useState } from "react";
+import { getTopSellingProducts } from "../_utils/ProductApis";
 import generateStars from "../_utils/generateStars";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import Image from "next/image";
 
-function NewArrivals() {
+function TopSelling() {
   const [products, setProducts] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    getProductsAddedWithinLastWeek().then((response) => {
+    getTopSellingProducts().then((response) => {
       setProducts(response.data.data);
       console.log(response.data.data);
     });
@@ -23,8 +23,8 @@ function NewArrivals() {
     <section>
       <div className="mx-auto max-w-7xl mt-[72px] px-4">
         <div className="text-center mb-16">
-          <h2 className="mt-14 font-[Satoshi] font-bold text-[48px]">
-            NEW ARRIVALS
+          <h2 className="mt-14 font-[Satoshi] font-[700] text-[48px]">
+            Top Selling
           </h2>
         </div>
 
@@ -105,4 +105,4 @@ function NewArrivals() {
   );
 }
 
-export default NewArrivals;
+export default TopSelling;

@@ -23,5 +23,25 @@ const getProductsAddedWithinLastWeek = ({
   return axiosClient.get(`/products?${params.toString()}`);
 };
 
-export default { getLastestProducts, getProductsAddedWithinLastWeek };
-export { getLastestProducts, getProductsAddedWithinLastWeek };
+const getTopSellingProducts = ({
+  limit = 8,
+  populate = "*",
+  sort = "salesCount:desc",
+} = {}) => {
+  const params = new URLSearchParams();
+  params.set("sort", sort);
+  params.set("pagination[limit]", String(limit));
+  params.set("populate", populate);
+
+  return axiosClient.get(`/products?${params.toString()}`);
+};
+export default {
+  getLastestProducts,
+  getProductsAddedWithinLastWeek,
+  getTopSellingProducts,
+};
+export {
+  getLastestProducts,
+  getProductsAddedWithinLastWeek,
+  getTopSellingProducts,
+};
